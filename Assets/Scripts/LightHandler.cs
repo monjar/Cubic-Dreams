@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class LightHandler : MonoBehaviour
 {
     public Light light;
-
+    private Material material;
     private bool isTurnedOn;
     // Start is called before the first frame update
     void Start()
     {
+        TryGetComponent(out Renderer renderer);
+        material = renderer.material;
         this.isTurnedOn = false;
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
@@ -23,21 +25,25 @@ public class LightHandler : MonoBehaviour
         }
         this.light.bounceIntensity = 2;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    
 
     public void activate()
     {
         this.isTurnedOn = true;
-        this.light.intensity = 24f;
+        float intensity = 3.0f;
+        material.EnableKeyword ("_EMISSION");
+        Color color = material.GetColor("_EmissionColor");
+        material.SetColor("_EmissionColor", color * intensity);
+        this.light.intensity = 25f;
     }
     
     public void deActivate()
     {
         this.isTurnedOn = false;
+        float intensity = 3.0f;
+        material.EnableKeyword ("_EMISSION");
+        Color color = material.GetColor("_EmissionColor");
+        material.SetColor("_EmissionColor", color / intensity);
         this.light.intensity = 6f;
     }
 
