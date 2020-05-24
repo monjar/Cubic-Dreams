@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR;
 
 
@@ -30,11 +31,11 @@ public class CameraMovementPC : MonoBehaviour
 
     void Update()
     {
-        
 #if UNITY_IOS || UNITY_ANDROID
         HandleMobileZoom();
 #else
-        HandlePcZoom();
+        if (!IsPointerOverUIObject())
+            HandlePcZoom();
 #endif
         var desiredPosition = target.position + offset;
         var smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
@@ -57,10 +58,12 @@ public class CameraMovementPC : MonoBehaviour
             Zoom(difference * 0.01f);
         }
     }
+
     public void ResetZoom()
     {
         offset = initialOffset * 2f;
     }
+
     private void Zoom(float increment)
     {
         if (camera.orthographic)
@@ -73,6 +76,15 @@ public class CameraMovementPC : MonoBehaviour
             if (isZoomPossible(increment))
                 this.offset -= increment * 0.5f * offset;
         }
+    }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 
     private void HandlePcZoom()

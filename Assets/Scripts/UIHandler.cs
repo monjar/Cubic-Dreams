@@ -6,6 +6,7 @@ using UnityEngine;
 public class UIHandler : MonoBehaviour
 {
     private AudioManager audioManager;
+    public GameObject hintsPanel;
     private void Start()
     {
         audioManager = AudioManager.GetInstance();
@@ -19,10 +20,16 @@ public class UIHandler : MonoBehaviour
     {
         audioManager.Play("ClickButtonSound");
     }
-
+    
     public void quit()
     {
         Application.Quit();
     }
+
+    public void ToggleHints()
+    {
+        hintsPanel.SetActive(!hintsPanel.activeInHierarchy);
+    }
+    
 
 }

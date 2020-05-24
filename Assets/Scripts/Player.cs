@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,7 +11,7 @@ public class Player : MonoBehaviour
     public ColorPanel colorPanel;
 
     public new Camera camera;
-
+    public GameObject hintsList;
     public List<GameObject> hitBoxes;
     public List<string> hints;
 
@@ -162,5 +163,16 @@ public class Player : MonoBehaviour
     public bool IsAlive()
     {
         return health > 0;
+    }
+
+    public void ShowHints()
+    {
+        for (var index = 0; index < hints.Count; index++)
+        {
+           var listItem =  hintsList.transform.GetChild(index + 1).gameObject.transform;
+           listItem.GetChild(0).gameObject.TryGetComponent(out TextMeshProUGUI textBox);
+           textBox.SetText(hints[index]);
+        }
+            
     }
 }
