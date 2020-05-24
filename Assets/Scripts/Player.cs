@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,6 +13,8 @@ public class Player : MonoBehaviour
 
     public List<GameObject> hitBoxes;
 
+    public Transform t;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -19,17 +22,28 @@ public class Player : MonoBehaviour
         this.health = 100;
         healthBar.setMaxHealth(this.health);
         this.camera = Camera.main;
+        print(t.position);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PortalDoor"))
+            InteractWithPortal();
     }
 
     // Update is called once per frame
     private void Update()
+    {
+        HandleInteractTry();
+    }
+
+    private void HandleInteractTry()
     {
         if (PressedInteract())
         {
             var ray = camera.ScreenPointToRay(Input.mousePosition);
             if (CanActivate(ray, out GameObject hitObject))
                 HandleObjectHit(hitObject);
-            
         }
     }
 
@@ -37,8 +51,6 @@ public class Player : MonoBehaviour
     {
         if (HitLightBox(hitObject))
             InteractWithBox(hitObject);
-        else if (HitPortal(hitObject))
-            InteractWithPortal();
         else if (HitTome(hitObject))
             InteractWithTome(hitObject);
     }
@@ -51,7 +63,7 @@ public class Player : MonoBehaviour
 
     private void InteractWithPortal()
     {
-        GameManager gm = GameManager.GetInstance();
+        var gm = GameManager.GetInstance();
         if (gm.IsOrdered(this.hitBoxes)) // The boxes are in order. so, hurray @_@.
             gm.WinGame();
         else // The boxes are not in order. so, something bad happens.//TODO
@@ -70,14 +82,14 @@ public class Player : MonoBehaviour
     private void InteractWithBox(GameObject boxObject)
     {
         boxObject.TryGetComponent(out LightHandler lightBox);
-        if (lightBox.isActive())
+        if (lightBox.IsActive())
         {
-            lightBox.deActivate();
+            lightBox.DeActivate();
             this.hitBoxes.Remove(boxObject);
         }
         else
         {
-            lightBox.activate();
+            lightBox.Activate();
             this.hitBoxes.Add(boxObject);
         }
 

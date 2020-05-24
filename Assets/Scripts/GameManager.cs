@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverImage;
     public GameObject wonImage;
-
+    public GameObject endGameParticles;
+    public new Camera camera;
     public static GameManager GetInstance()
     {
         return _instance;
@@ -33,8 +34,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        this.colorsOrder = new List<string>(new[] {"green", "white", "green", "blue", "orange", "purple", "red"});
-        
+        this.colorsOrder = new List<string>( /*new [] {"green", "white", "green", "blue", "orange", "purple", "red"}*/);
+
         //TODO Get orders from File
     }
 
@@ -56,7 +57,13 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         print("YOUUU WON!!!!!!!");
-        wonImage.SetActive(true);
+        var particles = endGameParticles.GetComponentsInChildren<ParticleSystem>();
+        foreach (var particle in particles)
+            particle.Play();
+        
+        GameObject.FindGameObjectWithTag("Portal").transform.GetChild(3).TryGetComponent(out ParticleSystem ray);
+        ray.Play();
+        // wonImage.SetActive(true);
     }
 
     public void GameOver()

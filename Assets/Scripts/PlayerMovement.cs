@@ -1,31 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public NavMeshAgent NavMeshAgent;
+    public NavMeshAgent navMeshAgent;
 
-    public Camera Camera;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public ParticleSystem clickParticle;
+
+    public new Camera camera;
+
+   
 
     // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        HandleMoveToPoint();
+    }
+
+    private void HandleMoveToPoint()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                NavMeshAgent.SetDestination(hit.point);
-                // print("Ray hit something...");
-            }
+            var ray = camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit))
+                if (navMeshAgent.CalculatePath(hit.point, new NavMeshPath()))
+                    MoveToPoint(hit);
         }
-        
+    }
+
+    private void MoveToPoint(RaycastHit hit)
+    {
+        navMeshAgent.SetDestination(hit.point);
+        MakeClickAnimation(hit);
+    }
+
+    private void MakeClickAnimation(RaycastHit hit)
+    {
+        clickParticle.transform.position = hit.point + new Vector3(0, 0.001f, 0);
+        clickParticle.Play();
     }
 }

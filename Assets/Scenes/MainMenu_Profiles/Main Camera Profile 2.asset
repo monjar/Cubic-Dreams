@@ -168,22 +168,22 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: 18
+    value: 19
   tint:
     overrideState: 0
     value: -53
   colorFilter:
     overrideState: 0
-    value: {r: 1, g: 1, b: 1, a: 1}
+    value: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
   hueShift:
-    overrideState: 1
+    overrideState: 0
     value: 0
   saturation:
     overrideState: 1
-    value: 17
+    value: 71
   brightness:
-    overrideState: 0
-    value: 42
+    overrideState: 1
+    value: -8
   postExposure:
     overrideState: 0
     value: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
     value: 100
   lift:
     overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    value: {x: 0.94471467, y: 1, z: 0.8894294, w: 0}
   gamma:
     overrideState: 0
     value: {x: 0.9775588, y: 0.87556684, z: 1, w: 0}
@@ -1443,14 +1443,14 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   colored:
-    overrideState: 1
+    overrideState: 0
     value: 1
   intensity:
     overrideState: 1
-    value: 0.228
+    value: 0.413
   size:
     overrideState: 1
-    value: 0.3
+    value: 0.44
   lumContrib:
     overrideState: 1
     value: 1
@@ -1466,7 +1466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -1488,7 +1488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f6f3f7c722b4544b97e3c75840aa33, type: 3}
   m_Name: AutoExposure
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -1658,25 +1658,25 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0
+    value: 2.36
   threshold:
     overrideState: 1
     value: 1.03
   softKnee:
     overrideState: 1
-    value: 1
+    value: 0.058
   clamp:
     overrideState: 0
-    value: 1e+11
+    value: 21
   diffusion:
     overrideState: 1
-    value: 5.61
+    value: 10
   anamorphicRatio:
     overrideState: 1
-    value: 0.26
+    value: 1
   color:
-    overrideState: 0
-    value: {r: 1, g: 1, b: 1, a: 1}
+    overrideState: 1
+    value: {r: 0, g: 0, b: 0, a: 1}
   fastMode:
     overrideState: 0
     value: 0

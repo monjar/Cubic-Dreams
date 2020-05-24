@@ -9,14 +9,13 @@ public class CameraMovementPC : MonoBehaviour
 {
     // Start is called before the first frame update
     public Transform target;
-    public Camera camera;
+    public new Camera camera;
     public float smoothSpeed = 0.125f;
     public Vector3 offset;
     public float minZoomDist;
     public float maxZoomDist;
     public float zoomSpeed;
     public int zoomCount = 0;
-    Vector3 touchStart;
 
     private void Awake()
     {
@@ -31,36 +30,35 @@ public class CameraMovementPC : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            touchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
-
-        if (Input.touchCount == 2)
-        {
-            Touch touchZero = Input.GetTouch(0);
-            Touch touchOne = Input.GetTouch(1);
-
-            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
-
-            float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-            float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
-
-            float difference = currentMagnitude - prevMagnitude;
-
-            zoom(difference * 0.01f);
-        }
-
-        handlePCZoom();
-        Vector3 desiredPosition = target.position + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        
+#if UNITY_IOS || UNITY_ANDROID
+        HandleMobileZoom();
+#else
+        HandlePcZoom();
+#endif
+        var desiredPosition = target.position + offset;
+        var smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
         transform.position = smoothedPosition;
 
         transform.LookAt(target);
     }
 
-    void zoom(float increment)
+    private void HandleMobileZoom()
+    {
+        if (Input.touchCount == 2)
+        {
+            var touchZero = Input.GetTouch(0);
+            var touchOne = Input.GetTouch(1);
+            var touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            var touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+            var prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            var currentMagnitude = (touchZero.position - touchOne.position).magnitude;
+            var difference = currentMagnitude - prevMagnitude;
+            Zoom(difference * 0.01f);
+        }
+    }
+
+    private void Zoom(float increment)
     {
         if (camera.orthographic)
         {
@@ -74,27 +72,10 @@ public class CameraMovementPC : MonoBehaviour
         }
     }
 
-    private void handlePCZoom()
+    private void HandlePcZoom()
     {
-        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
-        if (!isZoomPossible(scrollInput)) return;
-        if (camera.orthographic)
-        {
-            if (scrollInput < 0 && zoomCount > -4)
-            {
-                zoomCount--;
-                camera.orthographicSize -= scrollInput * 8f;
-            }
-            else if (scrollInput > 0 && zoomCount < 6)
-            {
-                zoomCount++;
-                camera.orthographicSize -= scrollInput * 8f;
-            }
-        }
-        else
-        {
-            this.offset -= scrollInput  * 0.5f* offset;
-        }
+        var scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        Zoom(scrollInput * 3);
     }
 
     private bool isZoomPossible(float scrollInput)

@@ -27,7 +27,7 @@ public class LightHandler : MonoBehaviour
     }
     
 
-    public void activate()
+    public void Activate()
     {
         this.isTurnedOn = true;
         float intensity = 3.0f;
@@ -37,7 +37,7 @@ public class LightHandler : MonoBehaviour
         this.light.intensity = 25f;
     }
     
-    public void deActivate()
+    public void DeActivate()
     {
         this.isTurnedOn = false;
         float intensity = 3.0f;
@@ -47,7 +47,7 @@ public class LightHandler : MonoBehaviour
         this.light.intensity = 6f;
     }
 
-    public bool isActive()
+    public bool IsActive()
     {
         return this.isTurnedOn;
     }
