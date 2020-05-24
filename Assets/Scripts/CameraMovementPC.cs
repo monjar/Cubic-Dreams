@@ -12,6 +12,7 @@ public class CameraMovementPC : MonoBehaviour
     public new Camera camera;
     public float smoothSpeed = 0.125f;
     public Vector3 offset;
+    public Vector3 initialOffset;
     public float minZoomDist;
     public float maxZoomDist;
     public float zoomSpeed;
@@ -24,8 +25,7 @@ public class CameraMovementPC : MonoBehaviour
 
     private void Start()
     {
-        print("asdsad");
-        XRSettings.eyeTextureResolutionScale = 2.0f;
+        this.initialOffset = offset;
     }
 
     void Update()
@@ -57,7 +57,10 @@ public class CameraMovementPC : MonoBehaviour
             Zoom(difference * 0.01f);
         }
     }
-
+    public void ResetZoom()
+    {
+        offset = initialOffset * 2f;
+    }
     private void Zoom(float increment)
     {
         if (camera.orthographic)

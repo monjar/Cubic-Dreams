@@ -10,7 +10,7 @@ public class MenuItem : MonoBehaviour
     public TextMeshPro textObject;
 
     private Material mat;
-
+    public SceneChanger sceneChanger;
     private void Start()
     {
         mat = GetComponent<Renderer>().material;
@@ -39,7 +39,7 @@ public class MenuItem : MonoBehaviour
         AudioManager.GetInstance().Play("ClickButtonSound");
         if (name == "PlayButton")
         {
-            SceneManager.LoadScene("GameScene");
+            sceneChanger.FadeToScene("GameScene");
         }
         else if (name == "CameraButton")
         {

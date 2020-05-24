@@ -19,7 +19,7 @@ public class EnemyMovementController : MonoBehaviour
     private int isAttackingAnimID;
     private bool isFollowingPlayer = false;
     private bool isGoingHome = false;
-    private float timeSinceLastAttack = 0.5f;
+    private float timeSinceLastAttack = 0.25f;
     private Player player;
     private float enemyDamage = 30f;
 
@@ -31,8 +31,11 @@ public class EnemyMovementController : MonoBehaviour
         try
         {
             playerObject = GameObject.FindWithTag("Player");
+            if (playerObject == null)
+                throw new UnassignedReferenceException();
             player = playerObject.GetComponent<Player>();
-            
+
+
             Vector3 v = transform.position;
             this.basePosition = new Vector3(v.x, v.y, v.z);
             navMeshAgent.isStopped = true;
@@ -43,7 +46,6 @@ public class EnemyMovementController : MonoBehaviour
         {
             this.isMenu = true;
         }
-
     }
 
     // Update is called once per frame
@@ -51,8 +53,8 @@ public class EnemyMovementController : MonoBehaviour
     {
         if (isMenu)
             return;
-        Vector3 playerPos = playerObject.transform.position;
-        Vector3 myPos = transform.position;
+        var playerPos = playerObject.transform.position;
+        var myPos = transform.position;
 
         if (DidArriveAtHome(myPos))
         {
@@ -90,7 +92,7 @@ public class EnemyMovementController : MonoBehaviour
         navMeshAgent.SetDestination(basePosition);
         animator.SetBool(isMovingAnimID, true);
         navMeshAgent.isStopped = false;
-        timeSinceLastAttack = 0.5f;
+        timeSinceLastAttack = 0.25f;
     }
 
     private void FollowPlayer(Vector3 playerPos)

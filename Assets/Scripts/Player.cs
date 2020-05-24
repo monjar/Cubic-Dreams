@@ -12,8 +12,7 @@ public class Player : MonoBehaviour
     public new Camera camera;
 
     public List<GameObject> hitBoxes;
-
-    public Transform t;
+    public List<string> hints;
 
     // Start is called before the first frame update
     private void Start()
@@ -22,7 +21,6 @@ public class Player : MonoBehaviour
         this.health = 100;
         healthBar.setMaxHealth(this.health);
         this.camera = Camera.main;
-        print(t.position);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -75,6 +73,7 @@ public class Player : MonoBehaviour
         tomeObject.TryGetComponent(out Tome tome);
         if (!tome.IsSeen())
         {
+            hints.Add(tome.GetHint());
             print(tome.GetHint());
         }
     }

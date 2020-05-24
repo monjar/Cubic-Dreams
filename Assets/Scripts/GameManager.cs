@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Michsky.UI.ModernUIPack;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     private List<string> colorsOrder;
-
-    public GameObject gameOverImage;
-    public GameObject wonImage;
+    public Animator gameOverAnimator;
     public GameObject endGameParticles;
-    public new Camera camera;
+    public CameraMovementPC cameraHandler;
+
     public static GameManager GetInstance()
     {
         return _instance;
@@ -57,10 +58,11 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         print("YOUUU WON!!!!!!!");
+        cameraHandler.ResetZoom();
         var particles = endGameParticles.GetComponentsInChildren<ParticleSystem>();
         foreach (var particle in particles)
             particle.Play();
-        
+
         GameObject.FindGameObjectWithTag("Portal").transform.GetChild(3).TryGetComponent(out ParticleSystem ray);
         ray.Play();
         // wonImage.SetActive(true);
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        gameOverImage.SetActive(true);
+        gameOverAnimator.SetTrigger("GameOver");
     }
 
     public void GoBackToMainMenu()
