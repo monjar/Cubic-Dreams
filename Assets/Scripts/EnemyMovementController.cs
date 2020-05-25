@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using Random = System.Random;
 
 public class EnemyMovementController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class EnemyMovementController : MonoBehaviour
     public float enemyRange = 5;
     public Animator animator;
     private float period = 1.5f;
-
+    private AudioManager audioManager;
     private Vector3 basePosition;
     private int isMovingAnimID;
     private int isAttackingAnimID;
@@ -34,8 +35,7 @@ public class EnemyMovementController : MonoBehaviour
             if (playerObject == null)
                 throw new UnassignedReferenceException();
             player = playerObject.GetComponent<Player>();
-
-
+            audioManager = AudioManager.GetInstance();
             Vector3 v = transform.position;
             this.basePosition = new Vector3(v.x, v.y, v.z);
             navMeshAgent.isStopped = true;
@@ -64,6 +64,12 @@ public class EnemyMovementController : MonoBehaviour
         {
             if (timeSinceLastAttack > period)
             {
+                Random random = new Random();
+                if (random.Next(100) < 30)
+                {
+                    audioManager.Play("GiantSound");
+                }
+                audioManager.Play("EnemyHitSound");
                 animator.SetTrigger(isAttackingAnimID);
                 player.DealDamage(this.enemyDamage);
                 timeSinceLastAttack = 0f;

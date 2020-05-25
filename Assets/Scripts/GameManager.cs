@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public Animator gameOverAnimator;
     public GameObject endGameParticles;
     public CameraMovementPC cameraHandler;
-
+    public AudioManager audioManager;
+    public SceneChanger sceneChanger;
     public static GameManager GetInstance()
     {
         return _instance;
@@ -35,8 +36,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        audioManager = AudioManager.GetInstance();
+        audioManager.Stop("MainMenu");
+        audioManager.Play("Ambient");
         this.colorsOrder = new List<string>( /*new [] {"green", "white", "green", "blue", "orange", "purple", "red"}*/);
-
         //TODO Get orders from File
     }
 
@@ -77,7 +80,8 @@ public class GameManager : MonoBehaviour
     {
         
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        
+        sceneChanger.FadeToScene("MainMenu");
     }
 
     public void PlayAgain()
@@ -85,7 +89,7 @@ public class GameManager : MonoBehaviour
         
         Time.timeScale = 1;
         var scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        sceneChanger.FadeToScene(scene.name);
     }
 
     private bool IsBoxOutOfOrder(List<GameObject> playerBoxes, int index)

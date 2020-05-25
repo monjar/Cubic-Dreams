@@ -12,6 +12,7 @@ public class UIHandler : MonoBehaviour
     private void Start()
     {
         audioManager = AudioManager.GetInstance();
+        
     }
 
     public void hoverSound()

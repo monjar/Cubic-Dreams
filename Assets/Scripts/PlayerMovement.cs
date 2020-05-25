@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -11,9 +12,13 @@ public class PlayerMovement : MonoBehaviour
 
     public new Camera camera;
 
-   
+    public AudioManager audioManager;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        audioManager = AudioManager.GetInstance();
+    }
+
     private void Update()
     {
         HandleMoveToPoint();
@@ -40,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private void MoveToPoint(RaycastHit hit)
     {
         navMeshAgent.SetDestination(hit.point);
+        audioManager.Play("Ping");
         MakeClickAnimation(hit);
     }
 

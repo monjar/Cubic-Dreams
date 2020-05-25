@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     public HealthBar healthBar;
     public ColorPanel colorPanel;
-
+    private AudioManager audioManager;
     public new Camera camera;
     public GameObject hintsList;
     public List<GameObject> hitBoxes;
@@ -17,7 +17,8 @@ public class Player : MonoBehaviour
 
     // Start is called before the first frame update
     private void Start()
-    {
+    {   
+        audioManager = AudioManager.GetInstance();
         hitBoxes = new List<GameObject>();
         this.health = 100;
         healthBar.setMaxHealth(this.health);
@@ -75,6 +76,7 @@ public class Player : MonoBehaviour
         if (!tome.IsSeen())
         {
             hints.Add(tome.GetHint());
+            audioManager.Play("HintRead");
             print(tome.GetHint());
         }
     }
@@ -84,11 +86,13 @@ public class Player : MonoBehaviour
         boxObject.TryGetComponent(out LightHandler lightBox);
         if (lightBox.IsActive())
         {
+            audioManager.Play("LightOff");
             lightBox.DeActivate();
             this.hitBoxes.Remove(boxObject);
         }
         else
         {
+            audioManager.Play("LightOn");
             lightBox.Activate();
             this.hitBoxes.Add(boxObject);
         }
