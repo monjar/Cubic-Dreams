@@ -11,15 +11,17 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     private List<string> colorsOrder;
     public Animator gameOverAnimator;
+    public Animator wonAnimator;
     public GameObject endGameParticles;
     public CameraMovementPC cameraHandler;
     public AudioManager audioManager;
     public SceneChanger sceneChanger;
+    private bool isGameDone;
     public static GameManager GetInstance()
     {
         return _instance;
     }
-
+    
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        isGameDone = false;
         audioManager = AudioManager.GetInstance();
         audioManager.Stop("MainMenu");
         audioManager.Play("Ambient");
@@ -60,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
-        print("YOUUU WON!!!!!!!");
+        isGameDone = true;
         cameraHandler.ResetZoom();
         var particles = endGameParticles.GetComponentsInChildren<ParticleSystem>();
         foreach (var particle in particles)
@@ -68,12 +71,14 @@ public class GameManager : MonoBehaviour
 
         GameObject.FindGameObjectWithTag("Portal").transform.GetChild(3).TryGetComponent(out ParticleSystem ray);
         ray.Play();
+        wonAnimator.SetTrigger("Show");
         // wonImage.SetActive(true);
     }
 
     public void GameOver()
     {
-        gameOverAnimator.SetTrigger("GameOver");
+        isGameDone = true;
+        gameOverAnimator.SetTrigger("Show");
     }
 
     public void GoBackToMainMenu()
@@ -100,5 +105,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public bool IsGameDone()
+    {
+        return isGameDone;
     }
 }

@@ -16,11 +16,11 @@ public class LightHandler : MonoBehaviour
         this.isTurnedOn = false;
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
-            this.light.intensity = 10f;
+            this.light.intensity = 3f;
         }
         else
         {
-            this.light.intensity = 6f;
+            this.light.intensity = 3f;
             
         }
         this.light.bounceIntensity = 2;

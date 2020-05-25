@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     public List<GameObject> hitBoxes;
     public List<string> hints;
 
+    public ParticleSystem lightUpParticle;
+
+    public ParticleSystem lightCircleParticle;
     // Start is called before the first frame update
     private void Start()
     {   
@@ -77,6 +80,8 @@ public class Player : MonoBehaviour
         {
             hints.Add(tome.GetHint());
             audioManager.Play("HintRead");
+            lightCircleParticle.Play();
+            lightUpParticle.Play();
             print(tome.GetHint());
         }
     }

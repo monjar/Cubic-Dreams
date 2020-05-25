@@ -9,6 +9,7 @@ using Random = System.Random;
 
 public class EnemyMovementController : MonoBehaviour
 {
+    private GameManager gameManager;
     public GameObject playerObject;
     public NavMeshAgent navMeshAgent;
     public float enemyRange = 5;
@@ -31,9 +32,12 @@ public class EnemyMovementController : MonoBehaviour
     {
         try
         {
+            
             playerObject = GameObject.FindWithTag("Player");
             if (playerObject == null)
                 throw new UnassignedReferenceException();
+            
+            this.gameManager = GameManager.GetInstance();
             player = playerObject.GetComponent<Player>();
             audioManager = AudioManager.GetInstance();
             Vector3 v = transform.position;
@@ -51,7 +55,7 @@ public class EnemyMovementController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isMenu)
+        if (isMenu || gameManager.IsGameDone())
             return;
         var playerPos = playerObject.transform.position;
         var myPos = transform.position;
@@ -148,4 +152,5 @@ public class EnemyMovementController : MonoBehaviour
                                      (Vector3.Distance(basePosition, playerPos) > enemyRange ||
                                       Mathf.Abs(basePosition.y - playerPos.y) > 0.3f));
     }
+    
 }

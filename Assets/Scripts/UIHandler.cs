@@ -9,10 +9,12 @@ public class UIHandler : MonoBehaviour
     private AudioManager audioManager;
     public GameObject hintsPanel;
     public GameObject pauseMenu;
+    public Animator hintsAnimator;
+    private bool isHintsOpen = false;
+
     private void Start()
     {
         audioManager = AudioManager.GetInstance();
-        
     }
 
     public void hoverSound()
@@ -32,7 +34,17 @@ public class UIHandler : MonoBehaviour
 
     public void ToggleHints()
     {
-        hintsPanel.SetActive(!hintsPanel.activeInHierarchy);
+        if (isHintsOpen)
+        {
+            hintsAnimator.SetTrigger("Close");
+            isHintsOpen = false;
+        }
+        else
+        {
+            hintsAnimator.SetTrigger("Open");
+            isHintsOpen = true;   
+        }
+
     }
 
     public void TogglePause()
@@ -48,6 +60,4 @@ public class UIHandler : MonoBehaviour
             pauseMenu.SetActive(false);
         }
     }
-
-   
 }
