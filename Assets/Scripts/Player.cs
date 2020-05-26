@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,15 +13,17 @@ public class Player : MonoBehaviour
     private AudioManager audioManager;
     public new Camera camera;
     public GameObject hintsList;
+    public GameObject hintNotification;
     public List<GameObject> hitBoxes;
     public List<string> hints;
 
     public ParticleSystem lightUpParticle;
 
     public ParticleSystem lightCircleParticle;
+
     // Start is called before the first frame update
     private void Start()
-    {   
+    {
         audioManager = AudioManager.GetInstance();
         hitBoxes = new List<GameObject>();
         this.health = 100;
@@ -78,12 +81,25 @@ public class Player : MonoBehaviour
         tomeObject.TryGetComponent(out Tome tome);
         if (!tome.IsSeen())
         {
+            hintNotification.TryGetComponent(out Animator notificationAnimator);
+            notificationAnimator.SetTrigger("Open");
+            StartCoroutine(CloseHintAfterTime(3, notificationAnimator));
+            notificationAnimator.transform.GetChild(0).gameObject.TryGetComponent(out TextMeshProUGUI textBox);
+            textBox.SetText(tome.GetHint());
+            tome.TurnOffEffect();
+            
             hints.Add(tome.GetHint());
             audioManager.Play("HintRead");
             lightCircleParticle.Play();
             lightUpParticle.Play();
             print(tome.GetHint());
         }
+    }
+
+    private IEnumerator CloseHintAfterTime(float time, Animator animator)
+    {
+        yield return new WaitForSeconds(time);
+        animator.SetTrigger("Close");
     }
 
     private void InteractWithBox(GameObject boxObject)
@@ -129,12 +145,12 @@ public class Player : MonoBehaviour
 
     private bool HitTome(GameObject go)
     {
-        return go.name.StartsWith("Tome");
+        return go.name.StartsWith("tome");
     }
 
     private bool HitLightBox(GameObject go)
     {
-        return go.name.Contains("Box");
+        return go.name.Contains("box");
     }
 
     private bool HitPortal(GameObject go)
@@ -178,10 +194,10 @@ public class Player : MonoBehaviour
     {
         for (var index = 0; index < hints.Count; index++)
         {
-           var listItem =  hintsList.transform.GetChild(index + 1).gameObject.transform;
-           listItem.GetChild(0).gameObject.TryGetComponent(out TextMeshProUGUI textBox);
-           textBox.SetText(hints[index]);
+            var listItem = hintsList.transform.GetChild(index + 1).gameObject.transform;
+            print(listItem.GetChild(0).name);
+            listItem.GetChild(0).gameObject.TryGetComponent(out TextMeshProUGUI textBox);
+            textBox.SetText(hints[index]);
         }
-            
     }
 }

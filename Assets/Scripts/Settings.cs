@@ -5,5 +5,5 @@ using UnityEngine;
 public static class Settings
 {
     public static bool isPresoective = true;
-
+    public static string mapName;
 }

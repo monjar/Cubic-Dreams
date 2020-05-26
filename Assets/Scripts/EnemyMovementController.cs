@@ -59,7 +59,6 @@ public class EnemyMovementController : MonoBehaviour
             return;
         var playerPos = playerObject.transform.position;
         var myPos = transform.position;
-
         if (DidArriveAtHome(myPos))
         {
             StayHome();
@@ -132,6 +131,7 @@ public class EnemyMovementController : MonoBehaviour
 
     private bool CanFollowPlayer(Vector3 playerPos)
     {
+
         return Vector3.Distance(basePosition, playerPos) < enemyRange &&
                Mathf.Abs(basePosition.y - playerPos.y) <= 0.3f;
     }

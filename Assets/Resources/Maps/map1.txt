@@ -1,0 +1,41 @@
+﻿Wall 0 0 0
+Wall 0,1,0
+wall 0,-1,0
+wall 0,2,0
+wall 0,3,0
+Wall -1 0 0
+Wall -2 0 0
+Wall 1,0,0
+Wall 2,0,0
+Wall 3,0,0
+Wall 4,0,0
+Wall 5,0,0
+wall 5,4,0
+wall 4,4,0
+wall 3,4,0
+wall 2,4,0
+wall 1,4,0
+wall 0,4,0
+wall 5,1,0
+wall 5,2,0
+wall 5,3,0
+wall 5,-1,0
+wall 5,-2,0
+wall 5, -2, 1
+wall 5, -3,1
+wall 5, -4,1
+wall 5, -5,1
+wall 5 , -5,0
+wall 4, -5, 0
+wall 3, -5, 0
+wall 2, -5,0
+wall 2,-4,0
+tome 4,3,0,left, "HIIIIIIIIIIIIIIIIIIIIIINt"
+enemy -2, -2, 0 ,left
+enemy 0,0,1,right
+light 5,-4,0, redBox
+light 5,5,0,bluebox
+stairs -1,-1,0,right
+stairs 1,1,0,left
+order blue, green
+player -5 -5 0

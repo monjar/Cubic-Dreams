@@ -10020,6 +10020,7 @@ GameObject:
   - component: {fileID: 4918151073182494331}
   - component: {fileID: 4918151073182494330}
   - component: {fileID: 4918151073182494329}
+  - component: {fileID: 5971417774434403311}
   m_Layer: 9
   m_Name: PortalWall2
   m_TagString: Untagged
@@ -10101,6 +10102,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &5971417774434403311
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918151073182494335}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4918151073204410395
 GameObject:
   m_ObjectHideFlags: 0
@@ -10206,6 +10223,7 @@ GameObject:
   - component: {fileID: 4918151073324088312}
   - component: {fileID: 4918151073324088319}
   - component: {fileID: 4918151073324088318}
+  - component: {fileID: 8874841301702032669}
   m_Layer: 9
   m_Name: PortalWall1
   m_TagString: Untagged
@@ -10287,6 +10305,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &8874841301702032669
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918151073324088316}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4918151073328862477
 GameObject:
   m_ObjectHideFlags: 0

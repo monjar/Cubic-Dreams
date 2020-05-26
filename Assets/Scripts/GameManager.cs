@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Michsky.UI.ModernUIPack;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -16,18 +18,22 @@ public class GameManager : MonoBehaviour
     public CameraMovementPC cameraHandler;
     public AudioManager audioManager;
     public SceneChanger sceneChanger;
+    public NavMeshSurface playerNavmesh;
+    public NavMeshSurface enemyNavmesh;
     private bool isGameDone;
+
     public static GameManager GetInstance()
     {
         return _instance;
     }
-    
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
             Destroy(this.gameObject);
         else
             _instance = this;
+        
     }
 
     private void OnDestroy()
@@ -35,15 +41,19 @@ public class GameManager : MonoBehaviour
         if (this == _instance)
             _instance = null;
     }
+    
 
     private void Start()
     {
+        MapInitializer.GetInstance().Initialize();
+        playerNavmesh.BuildNavMesh();
+        enemyNavmesh.BuildNavMesh();
+        Application.targetFrameRate = Application.isMobilePlatform ? 30 : 120;
+        
         isGameDone = false;
         audioManager = AudioManager.GetInstance();
         audioManager.Stop("MainMenu");
         audioManager.Play("Ambient");
-        this.colorsOrder = new List<string>( /*new [] {"green", "white", "green", "blue", "orange", "purple", "red"}*/);
-        //TODO Get orders from File
     }
 
     public bool IsOrdered(List<GameObject> playerBoxes)
@@ -53,6 +63,11 @@ public class GameManager : MonoBehaviour
         return !FoundMisplaced(playerBoxes);
     }
 
+    public void SetOrder(string[] ordersArray)
+    {
+        colorsOrder = new List<string>(ordersArray);
+        print(colorsOrder);
+    }
     private bool FoundMisplaced(List<GameObject> playerBoxes)
     {
         for (var index = 0; index < playerBoxes.Count; index++)
@@ -83,15 +98,13 @@ public class GameManager : MonoBehaviour
 
     public void GoBackToMainMenu()
     {
-        
         Time.timeScale = 1;
-        
+
         sceneChanger.FadeToScene("MainMenu");
     }
 
     public void PlayAgain()
     {
-        
         Time.timeScale = 1;
         var scene = SceneManager.GetActiveScene();
         sceneChanger.FadeToScene(scene.name);
