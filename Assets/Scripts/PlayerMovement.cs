@@ -22,6 +22,11 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         HandleMoveToPoint();
+        if (navMeshAgent.path.status == NavMeshPathStatus.PathPartial)
+        {
+            print("ASDDDDDD");
+            navMeshAgent.SetDestination(transform.position);
+        }
     }
 
     private void HandleMoveToPoint()
@@ -34,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
                     MoveToPoint(hit);
         }
     }
+
     private bool IsPointerOverUIObject()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
@@ -42,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
     }
+
     private void MoveToPoint(RaycastHit hit)
     {
         navMeshAgent.SetDestination(hit.point);

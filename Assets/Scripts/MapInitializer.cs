@@ -36,13 +36,13 @@ public class MapInitializer : MonoBehaviour
 
     private void Start()
     {
-        enemiesCount = 0;
-        player = GameObject.FindWithTag("Player");
     }
-
+    
     public void Initialize()
     {
-        gameManager = GameManager.GetInstance();
+        
+        enemiesCount = 0;
+        player = GameObject.FindWithTag("Player");
         // string selectedMap = null;
         // foreach (var map in maps)
         // {
@@ -175,22 +175,26 @@ public class MapInitializer : MonoBehaviour
                     gameManager.SetOrder(arguments.Skip(1).Take(arguments.Length - 1).ToArray());
                     break;
                 case "player":
+                    print(player.transform.position);
                     player.transform.position = new Vector3(float.Parse(arguments[1]), float.Parse(arguments[3]) + 0.5f,
                         float.Parse(arguments[2]));
+                    
+                    print(player.transform.position);
                     break;
                 case "enemy":
-                    var enemyPos = new Vector3(float.Parse(arguments[1]), float.Parse(arguments[3]) + 0.5f,
+                    var enemyPos = new Vector3(float.Parse(arguments[1]), float.Parse(arguments[3]) + 0.45f,
                         float.Parse(arguments[2]));
+                    
                     Quaternion enemyRotation;
-                    if (arguments[4].ToLower() == "up")
+                    if (arguments[4].ToLower() == "down")
                     {
                         enemyRotation = Quaternion.Euler(0, 180, 0);
                     }
-                    else if (arguments[4].ToLower() == "down")
+                    else if (arguments[4].ToLower() == "up")
                     {
                         enemyRotation = Quaternion.Euler(0, 0, 0);
                     }
-                    else if (arguments[4].ToLower() == "right")
+                    else if (arguments[4].ToLower() == "left")
                     {
                         enemyRotation = Quaternion.Euler(0, -90, 0);
                     }
@@ -208,7 +212,7 @@ public class MapInitializer : MonoBehaviour
                     break;
             }
         }
-
+        gameManager.bakeNavmeshes();
         reader.Close();
     }
 

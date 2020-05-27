@@ -145,8 +145,8 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.52
-    m_Bias: 2
+    m_Strength: 1
+    m_Bias: 0
     m_NormalBias: 0.4
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
@@ -5244,7 +5244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4918151072249088249}
   m_LocalRotation: {x: 0.26655522, y: 0.2665551, z: 0.6549416, w: 0.6549414}
-  m_LocalPosition: {x: -0.723, y: 8.11, z: -0.75}
+  m_LocalPosition: {x: -0.723, y: 19, z: -0.75}
   m_LocalScale: {x: 2, y: 0.001, z: 0.001}
   m_Children: []
   m_Father: {fileID: 4918151073073412409}

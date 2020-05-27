@@ -23,7 +23,7 @@ public class LightHandler : MonoBehaviour
             this.light.intensity = 3f;
             
         }
-        this.light.bounceIntensity = 2;
+        this.light.bounceIntensity = 1;
     }
     
 
@@ -34,7 +34,7 @@ public class LightHandler : MonoBehaviour
         material.EnableKeyword ("_EMISSION");
         Color color = material.GetColor("_EmissionColor");
         material.SetColor("_EmissionColor", color * intensity);
-        this.light.intensity = 25f;
+        this.light.intensity = 20f;
     }
     
     public void DeActivate()

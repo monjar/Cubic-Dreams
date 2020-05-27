@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public SceneChanger sceneChanger;
     public NavMeshSurface playerNavmesh;
     public NavMeshSurface enemyNavmesh;
+    public MapInitializer mapInitializer;
     private bool isGameDone;
 
     public static GameManager GetInstance()
@@ -33,7 +34,9 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         else
             _instance = this;
-        
+
+
+        mapInitializer.Initialize();
     }
 
     private void OnDestroy()
@@ -41,13 +44,16 @@ public class GameManager : MonoBehaviour
         if (this == _instance)
             _instance = null;
     }
-    
+
+    public void bakeNavmeshes()
+    {
+        playerNavmesh.BuildNavMesh();
+        enemyNavmesh.BuildNavMesh();
+    }
 
     private void Start()
     {
-        MapInitializer.GetInstance().Initialize();
-        playerNavmesh.BuildNavMesh();
-        enemyNavmesh.BuildNavMesh();
+       
         Application.targetFrameRate = Application.isMobilePlatform ? 30 : 120;
         
         isGameDone = false;

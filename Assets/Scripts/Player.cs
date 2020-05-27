@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         HandleInteractTry();
+        
     }
 
     private void HandleInteractTry()
@@ -83,7 +85,7 @@ public class Player : MonoBehaviour
         {
             hintNotification.TryGetComponent(out Animator notificationAnimator);
             notificationAnimator.SetTrigger("Open");
-            StartCoroutine(CloseHintAfterTime(3, notificationAnimator));
+            StartCoroutine(CloseHintAfterTime(6, notificationAnimator));
             notificationAnimator.transform.GetChild(0).gameObject.TryGetComponent(out TextMeshProUGUI textBox);
             textBox.SetText(tome.GetHint());
             tome.TurnOffEffect();
@@ -160,7 +162,7 @@ public class Player : MonoBehaviour
 
     private bool IsNear(RaycastHit hit)
     {
-        return HorizontalDist(hit.transform.position, transform.position) < 1.3f;
+        return HorizontalDist(hit.transform.position, transform.position) < 1.6f;
     }
 
     private bool IsInLevel(RaycastHit hit)
