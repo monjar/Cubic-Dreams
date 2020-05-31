@@ -53,6 +53,7 @@ public class MapInitializer : MonoBehaviour
         //
         //     
         // }
+        mapName = Settings.mapName;
         TextAsset selectedMap = Resources.Load("Maps/" + mapName) as TextAsset;
         StringReader reader = new StringReader(selectedMap.text);
         string line;
@@ -212,7 +213,7 @@ public class MapInitializer : MonoBehaviour
                     break;
             }
         }
-        gameManager.bakeNavmeshes();
+        gameManager.BakeNavmeshes();
         reader.Close();
     }
 

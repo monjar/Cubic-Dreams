@@ -12,6 +12,7 @@ TagManager:
   - Purple
   - Portal
   - PortalDoor
+  - SceneTransition
   layers:
   - Default
   - TransparentFX

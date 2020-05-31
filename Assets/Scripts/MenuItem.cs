@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class MenuItem : MonoBehaviour
@@ -11,6 +12,10 @@ public class MenuItem : MonoBehaviour
 
     private Material mat;
     public SceneChanger sceneChanger;
+    public MainMenu mainMenu;
+    public Camera camera;
+    public string mapName;
+
     private void Start()
     {
         mat = GetComponent<Renderer>().material;
@@ -22,12 +27,23 @@ public class MenuItem : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        AudioManager.GetInstance().Play("HoverInButtonSound");
-        mat.EnableKeyword("_EMISSION");
-        mat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
-        mat.SetColor("_EmissionColor", new Color(154,0,0));
+        if (!IsPointerOverUIObject())
+        {
+            AudioManager.GetInstance().Play("HoverInButtonSound");
+            mat.EnableKeyword("_EMISSION");
+            mat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+            mat.SetColor("_EmissionColor", new Color(154, 0, 0));
+        }
     }
 
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
 
     private void OnMouseExit()
     {
@@ -36,27 +52,45 @@ public class MenuItem : MonoBehaviour
 
     private void OnMouseDown()
     {
-        AudioManager.GetInstance().Play("ClickButtonSound");
-        if (name == "PlayButton")
+        if (!IsPointerOverUIObject())
         {
-            sceneChanger.FadeToScene("GameScene");
-        }
-        else if (name == "CameraButton")
-        {
-            print("PIGPIUG");
-            Settings.isPresoective = !Settings.isPresoective;
-            if (Settings.isPresoective)
+            AudioManager.GetInstance().Play("ClickButtonSound");
+            if (name == "PlayButton")
             {
-                textObject.SetText("Perspective");
+                sceneChanger.FadeToScene("LevelsScene");
             }
-            else
+            else if (name == "CameraButton")
             {
-                textObject.SetText("Orthographic");
+                print("PIGPIUG");
+                Settings.isPresoective = !Settings.isPresoective;
+                if (Settings.isPresoective)
+                {
+                    textObject.SetText("Perspective");
+                    camera.orthographic = false;
+                }
+                else
+                {
+                    textObject.SetText("Orthographic");
+                    
+                    camera.orthographic = true;
+                }
+            }
+            else if (name == "ExitButton")
+            {
+                Application.Quit();
+            }
+            else if (name == "HowToButton")
+            {
+                mainMenu.ToggleHow();
+            }else if (name == "AboutMeButton")
+            {
+                mainMenu.ToggleAbout();
+            }else if (name == "LevelButton")
+            {
+                Settings.mapName = mapName;
+                GameObject.FindWithTag("SceneTransition").TryGetComponent(out sceneChanger);
+                sceneChanger.FadeToScene("GameScene");
             }
         }
-        else if (name == "ExitButton")
-        {
-            Application.Quit();
-        } 
     }
 }

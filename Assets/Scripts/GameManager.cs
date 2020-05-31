@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
             _instance = null;
     }
 
-    public void bakeNavmeshes()
+    public void BakeNavmeshes()
     {
         playerNavmesh.BuildNavMesh();
         enemyNavmesh.BuildNavMesh();
@@ -53,9 +53,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-       
-        Application.targetFrameRate = Application.isMobilePlatform ? 30 : 120;
         
+        // Screen.SetResolution(1920, (Screen.width * 1920)/Screen.height , true);
         isGameDone = false;
         audioManager = AudioManager.GetInstance();
         audioManager.Stop("MainMenu");
