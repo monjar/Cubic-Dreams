@@ -66,20 +66,21 @@ public class MenuItem : MonoBehaviour
                 if (Settings.isPresoective)
                 {
                     textObject.SetText("Perspective");
-                    camera.orthographic = false;
                 }
                 else
                 {
                     textObject.SetText("Orthographic");
                     
-                    camera.orthographic = true;
                 }
             }
             else if (name == "ExitButton")
             {
                 Application.Quit();
             }
-            else if (name == "HowToButton")
+            else if (name == "Gamopedia")
+            {
+                mainMenu.TogglePedia();
+            }else if (name == "HowToButton")
             {
                 mainMenu.ToggleHow();
             }else if (name == "AboutMeButton")

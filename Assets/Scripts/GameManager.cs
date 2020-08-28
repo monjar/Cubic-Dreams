@@ -88,7 +88,8 @@ public class GameManager : MonoBehaviour
         var particles = endGameParticles.GetComponentsInChildren<ParticleSystem>();
         foreach (var particle in particles)
             particle.Play();
-
+        audioManager.Play("Fireworks");
+        audioManager.Play("WinSound");
         GameObject.FindGameObjectWithTag("Portal").transform.GetChild(3).TryGetComponent(out ParticleSystem ray);
         ray.Play();
         wonAnimator.SetTrigger("Show");

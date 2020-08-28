@@ -46,19 +46,23 @@ public class LevelsManager : MonoBehaviour
         for (var index = 0; index < maps.Length; index++)
         {
             var levelpos = new Vector3(-4f + index * 1.2f, 0, 0);
-            GameObject button = Instantiate(levelsPrefab, levelpos, Quaternion.identity);
+            var button = Instantiate(levelsPrefab, levelpos, Quaternion.identity);
             button.name = "LevelButton";
-            button.transform.GetChild(2).gameObject.GetComponent<TextMeshPro>().SetText(maps[index].name);
+            button.transform.GetChild(2).gameObject.GetComponent<TextMeshPro>().SetText(maps[index].name.Substring(4));
             button.GetComponent<MenuItem>().mapName = maps[index].name;
             button.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().SetText((index + 1) + "");
             buttons.Add(button);
-            print(maps[index].name);
             if (index == 0)
             {
                 camera.target = button.transform;
                 targetIndex = 0;
             }
         }
+        var pos = new Vector3(-4f + maps.Length * 1.2f, 0, 0);
+        var soon = Instantiate(levelsPrefab, pos, Quaternion.identity);
+        soon.transform.GetChild(2).gameObject.GetComponent<TextMeshPro>().SetText("Coming soon...");
+        soon.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().SetText((maps.Length + 1)+"");
+        
     }
 
     // Update is called once per frame

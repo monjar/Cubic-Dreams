@@ -87,7 +87,7 @@ public class CameraMovementPC : MonoBehaviour
             var prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
             var currentMagnitude = (touchZero.position - touchOne.position).magnitude;
             var difference = currentMagnitude - prevMagnitude;
-            Zoom(difference * 0.01f);
+            Zoom(difference * 0.06f);
         }
     }
 

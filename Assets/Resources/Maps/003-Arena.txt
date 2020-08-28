@@ -1,0 +1,183 @@
+﻿Wall -5 -5 0
+Wall -4 -5 0
+Wall -3 -5 0
+Wall -2 -5 0
+Wall -1 -5 0
+Wall 0 -5 0
+Wall 1 -5 0
+Wall 2 -5 0
+Wall 3 -5 0
+Wall 4 -5 0
+Wall 5 -5 0
+Wall -5 -4 0
+Wall -4 -4 0
+Wall -3 -4 0
+Wall -2 -4 0
+Wall -1 -4 0
+Wall 0 -4 0
+Wall 1 -4 0
+Wall 2 -4 0
+Wall 3 -4 0
+Wall 4 -4 0
+Wall 5 -4 0
+Wall -5 -3 0
+Wall -4 -3 0
+Wall 4 -3 0
+Wall 5 -3 0
+Wall -5 -2 0
+Wall -4 -2 0
+Wall 4 -2 0
+Wall 5 -2 0
+Wall -5 -1 0
+Wall -4 -1 0
+Wall 4 -1 0
+Wall 5 -1 0
+Wall -5 0 0
+Wall -4 0 0
+Wall 4 0 0
+Wall 5 0 0
+Wall -5 1 0
+Wall -4 1 0
+Wall 4 1 0
+Wall 5 1 0
+Wall -5 2 0
+Wall -4 2 0
+Wall 4 2 0
+Wall 5 2 0
+Wall -5 3 0
+Wall -4 3 0
+Wall 4 3 0
+Wall 5 3 0
+Wall -5 4 0
+Wall -4 4 0
+Wall -3 4 0
+Wall -2 4 0
+Wall -1 4 0
+Wall 0 4 0
+Wall 1 4 0
+Wall 2 4 0
+Wall 3 4 0
+Wall 4 4 0
+Wall 5 4 0
+Wall -5 5 0
+Wall -4 5 0
+Wall -3 5 0
+Wall -2 5 0
+Wall -1 5 0
+Wall 0 5 0
+Wall 1 5 0
+Wall 2 5 0
+Wall 3 5 0
+Wall 4 5 0
+Wall 5 5 0
+Wall -5 -5 1
+Wall -4 -5 1
+Wall -3 -5 1
+Wall -2 -5 1
+Wall -1 -5 1
+Wall 0 -5 1
+Wall 1 -5 1
+Wall 2 -5 1
+Wall 3 -5 1
+Wall 4 -5 1
+Wall 5 -5 1
+Wall -5 -4 1
+Wall 5 -4 1
+Wall -5 -3 1
+Wall 5 -3 1
+Wall -5 -2 1
+Wall 5 -2 1
+Wall -5 -1 1
+Wall 5 -1 1
+Wall -5 0 1
+Wall 5 0 1
+Wall -5 1 1
+Wall 5 1 1
+Wall -5 2 1
+Wall 5 2 1
+Wall -5 3 1
+Wall 5 3 1
+Wall -5 4 1
+Wall 5 4 1
+Wall -5 5 1
+Wall -4 5 1
+Wall -3 5 1
+Wall -2 5 1
+Wall -1 5 1
+Wall 0 5 1
+Wall 1 5 1
+Wall 2 5 1
+Wall 3 5 1
+Wall 4 5 1
+Wall 5 5 1
+Wall -6 -6 2
+Wall -5 -6 2
+Wall -4 -6 2
+Wall -3 -6 2
+Wall -2 -6 2
+Wall -1 -6 2
+Wall 0 -6 2
+Wall 1 -6 2
+Wall 2 -6 2
+Wall 3 -6 2
+Wall 4 -6 2
+Wall 5 -6 2
+Wall 6 -6 2
+Wall -6 -5 2
+Wall 6 -5 2
+Wall -6 -4 2
+Wall 6 -4 2
+Wall -6 -3 2
+Wall 6 -3 2
+Wall -6 -2 2
+Wall 6 -2 2
+Wall -6 -1 2
+Wall 6 -1 2
+Wall -6 0 2
+Wall 6 0 2
+Wall -6 1 2
+Wall 6 1 2
+Wall -6 2 2
+Wall 6 2 2
+Wall -6 3 2
+Wall 6 3 2
+Wall -6 4 2
+Wall 6 4 2
+Wall -6 5 2
+Wall 6 5 2
+Wall -6 6 2
+Wall -5 6 2
+Wall -4 6 2
+Wall -3 6 2
+Wall -2 6 2
+Wall -1 6 2
+Wall 0 6 2
+Wall 1 6 2
+Wall 2 6 2
+Wall 3 6 2
+Wall 4 6 2
+Wall 5 6 2
+Wall 6 6 2
+tome -1 -6,3,right, "It's ancient rome... The land of blood and big clocks?"
+stairs -5,-5,2,down
+stairs 5,-5,2,down
+stairs -5,5,2,up
+stairs 5,5,2,up
+stairs -4,-4,1,down
+stairs 4,-4,1,down
+stairs -4,4,1,up
+stairs 4,4,1,up
+stairs -3,-3,0,down
+stairs 3,-3,0,down
+light 0,5,2,redbox
+light 5,0,2,bluebox
+light 0,-5,2,greenbox
+light -5,0,2,whitebox
+portal 0,3,0,down
+player 0 -6 3
+enemy -1, -1, 0  ,left
+enemy 1, 1, 0  ,right
+enemy 1, -1, 0  ,left
+enemy -1, 1, 0  ,right
+enemy 0, 0, 0  ,up
+order red, blue, green, white

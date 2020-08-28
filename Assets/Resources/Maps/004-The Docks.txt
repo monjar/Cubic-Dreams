@@ -112,8 +112,8 @@ wall 5,2,2
 wall 5,1,1
 wall 5, 2.5, 3
 stairs -3,4,1, right
-tome 4,3,0,left, "Roses are red, violets are blue... can't say if it's cocaine or just some glue"
-tome 3,-4,0,up, "The old man says: i'd love a good 'ol breakfast. some milk, some bacon and juice... oh! i forgot an 'a'"
+tome 4,3,0,left, "Roses are red, violets and blue... Can't say if it's cocaine or just some glue"
+tome 3,-4,0,up, "The old man says: i'd love a good 'ol breakfast. some milk, some bacon and juice... oh! i forgot an 'e'"
 tome -2,-4,0,right, "The dreams seek light. Feed the darkness with order then escape through the Gate Of Dreams"
 light -5,5,6,greenbox
 light 5,-4,0, orangeBox

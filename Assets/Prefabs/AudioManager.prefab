@@ -104,3 +104,15 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - name: WinSound
+    clip: {fileID: 8300000, guid: 0b13ba96bc2ad174eacc709e7eec4c23, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: Fireworks
+    clip: {fileID: 8300000, guid: ddc75649cff79824ab7edf0a9344f164, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}

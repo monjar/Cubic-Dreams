@@ -1,0 +1,27 @@
+﻿wall 0 -4, 0
+wall 1 -4, 0
+wall -1 -4, 0
+wall 2 -4, 0
+wall -2 -4, 0
+wall 1 2, 0
+wall -1 2, 0
+wall 2 -3, 0
+wall -2 -3, 0
+wall 2 -2, 0
+wall -2 -2, 0
+wall 2 -1, 0
+wall -2 -1, 0
+wall 2 0, 0
+wall -2 0, 0
+wall 2 1, 0
+wall -2 1, 0
+wall 2 2, 0
+wall -2 2, 0
+wall 0 2, 0
+tome 0,0,0,down, "Left-CLick on places to move around and Right-Click on objects to activate them."
+stairs -1,1,0,up
+wall 2 1, 1
+wall 2 2, 1
+portal 2,0,1,down
+player 0 -3 0
+order 
